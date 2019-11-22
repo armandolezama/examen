@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="question5-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <file-drop-zone
+      multiple
+      accept=".csv, .tsv"
+      files="{{files}}"
+      last-error="{{error}}"
+      on-error="onError">
+    
+      <!-- Custom slot element to style the interior of the drop zone -->
+      <div slot="drop-zone" class="layout vertical center center-justified">
+        <iron-icon icon="description"></iron-icon>
+        <div class="title">Drop CSV or TSV files here</div>
+        <!-- error message -->
+        <div class="small">[[error.message]]</div>
+        <!-- list of file selected -->
+        <template is="dom-repeat" items="[[files]]">
+          <div class="small">[[item.name]]</div>
+        </template>
+      </div>
+    
+    </file-drop-zone>
+  </template>
+
+  <script>
+    /**
+     * `question5-element`
+     * Question 5 of test
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class Question5Element extends Polymer.Element {
+      static get is() { return 'question5-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'question5-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(Question5Element.is, Question5Element);
+  </script>
+</dom-module>

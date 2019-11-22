@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-input/iron-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="file-drop-zone.html">
+
+<dom-module id="question4-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      file-drop-zone {
+        border: 1px dashed transparent;
+        color: #aaa;
+        background-color: #efefef;
+        width: 560px;
+        height: 300px;
+        transition: all .3s;
+      }
+      file-drop-zone.dragover {
+        border: 1px dashed #E91E63;
+        transition: all .3s;
+      }
+      file-drop-zone:hover > [slot='drop-zone'],
+      file-drop-zone.dragover > [slot='drop-zone'] {
+        color: #E91E63;
+        transition: all .3s;
+      }
+      file-drop-zone.errored {
+        background-color: #FFEBEE;
+        transition: all .3s;
+      }
+      file-drop-zone[has-files] {
+        color: #2196F3;
+        transition: all .3s;
+      }
+      [slot='drop-zone'] {
+        text-align: center;
+        font-size: 1.1em;
+        --iron-icon-height: 64px;
+        --iron-icon-width: 64px;
+      }
+      [slot='drop-zone'] > .title {
+        font-size: 1.2em;
+      }
+      [slot='drop-zone'] > .small{
+        font-size: 0.6em;
+      }
+    </style>
+    
+    <iron-input>
+      <input type="number" type="Number" value="{{age::input}}" placeholder="¿cuál es tu edad?">
+    </iron-input>
+    <paper-button on-click="goOneYearToTheFuture" raised>Ir un año al futuro</paper-button>
+  </template>
+
+  <script>
+    /**
+     * `question4-element`
+     * question for test 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class Question4Element extends Polymer.Element {
+      static get is() { return 'question4-element'; }
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: ''
+          },
+          age: {
+            type: Number,
+            value: 0
+          }
+        };
+      }
+      goOneYearToTheFuture(){
+        let newAge = this.age++
+        this.dispatchEvent(new CustomEvent('theFuture', {detail: {message: 'Welcome to the future, man'}}))
+      }
+    }
+
+    window.customElements.define(Question4Element.is, Question4Element);
+  </script>
+</dom-module>
